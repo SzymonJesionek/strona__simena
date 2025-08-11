@@ -1,2 +1,2 @@
-# strona__simena
-web page Simena
+# strona-simena
+This is the web page of the company Simena.

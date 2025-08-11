@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorized Document Library with Preview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Variables for easy theme management */
+        :root {
+            --primary-color: #007bff;
+            --primary-hover-color: #0056b3;
+            --text-color: #333;
+            --secondary-text-color: #666;
+            --border-color: #ddd;
+            --background-light: #f9f9f9;
+            --card-background: #ffffff;
+            --shadow-light: rgba(0,0,0,0.1);
+            --gap-spacing: 20px;
+            --border-radius: 8px;
+            --font-family: 'Inter', sans-serif;
+
+            /* New variables for modal/preview */
+            --modal-background: rgba(0, 0, 0, 0.7);
+            --modal-content-background: #ffffff;
+            --modal-padding: 20px;
+
+            /* New variables for sidebar */
+            --sidebar-width: 250px;
+            --sidebar-background: #ffffff;
+            --sidebar-text-color: #333;
+            --sidebar-active-bg: var(--primary-color);
+            --sidebar-active-text: white;
+            --sidebar-hover-bg: #e9ecef;
+        }
+
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex; /* Use flexbox for main layout */
+            min-height: 100vh; /* Ensure body takes full viewport height */
+        }
+
+        /* Main Content Wrapper */
+        .content-wrapper {
+            flex-grow: 1; /* Allows content to take remaining space */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Styling */
+        .page-header {
+            text-align: center;
+            padding: 40px var(--gap-spacing);
+            background-color: var(--card-background);
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: var(--gap-spacing);
+        }
+
+        .page-header h1 {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            font-size: 1.1em;
+            color: var(--secondary-text-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Document Library Grid */
+        .document-library-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--gap-spacing);
+            padding: 0 var(--gap-spacing) var(--gap-spacing);
+            max-width: 1200px; /* Constrain width for better readability */
+            margin: 0 auto; /* Center the grid */
+            flex-grow: 1; /* Allows grid to take available space */
+        }
+
+        /* Individual Document Card */
+        .document-card {
+            background-color: var(--card-background);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 10px var(--shadow-light);
+            overflow: hidden; /* Ensures border-radius applies to children */
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+        }
+
+        .document-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        .document-card .card-content { /* A div to wrap content inside the clickable area */
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Make the content fill the card */
+        }
+
+        .document-thumbnail {
+            width: 100%;
+            height: 180px; /* Slightly increased height for better visual */
+            object-fit: cover; /* Cover the area, cropping if necessary */
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .document-info {
+            padding: 15px;
+            flex-grow: 1; /* Allows info section to take available space */
+        }
+
+        .document-title {
+            margin-top: 0;
+            font-size: 1.3em;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .document-description {
+            font-size: 0.95em;
+            color: var(--secondary-text-color);
+            margin-bottom: 15px;
+        }
+
+        .card-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--background-light);
+        }
+
+        .preview-button, .download-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+            text-decoration: none; /* For download link */
+        }
+
+        .preview-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: 1px solid var(--primary-color);
+        }
+
+        .preview-button:hover {
+            background-color: var(--primary-hover-color);
+            border-color: var(--primary-hover-color);
+        }
+
+        .download-link {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .download-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .icon {
+            width: 18px;
+            height: 18px;
+            fill: currentColor; /* Inherit color from parent */
+        }
+
+        /* --- Modal / PDF Preview Overlay --- */
+        .pdf-preview-modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000; /* High z-index to be on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--modal-background);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .pdf-preview-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: var(--modal-content-background);
+            margin: var(--gap-spacing);
+            padding: var(--modal-padding);
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            max-width: 900px; /* Max width for the modal content */
+            height: 90%;
+            max-height: 90vh; /* Max height for the modal content */
+            position: relative; /* For close button positioning */
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 15px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.5em;
+            color: var(--text-color);
+        }
+
+        .modal-close-button {
+            background: none;
+            border: none;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--secondary-text-color);
+            padding: 5px;
+            line-height: 1;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .modal-close-button:hover {
+            color: var(--primary-color);
+        }
+
+        .pdf-iframe-container {
+            flex-grow: 1; /* Make iframe container fill available space */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pdf-iframe {
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+        }
+
+        /* --- Side Menu Styling --- */
+        .side-menu {
+            width: var(--sidebar-width);
+            min-width: var(--sidebar-width); /* Prevent shrinking */
+            background-color: var(--sidebar-background);
+            border-right: 1px solid var(--border-color);
+            padding: var(--gap-spacing) 0;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0; /* Prevent sidebar from shrinking */
+        }
+
+        .side-menu h2 {
+            font-size: 1.4em;
+            color: var(--primary-color);
+            padding: 0 var(--gap-spacing);
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .category-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .category-item {
+            margin-bottom: 5px;
+        }
+
+        .category-button {
+            display: block; /* Make the whole area clickable */
+            width: 100%;
+            padding: 10px var(--gap-spacing);
+            text-align: left;
+            background: none;
+            border: none;
+            color: var(--sidebar-text-color);
+            font-family: var(--font-family);
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+
+        .category-button:hover {
+            background-color: var(--sidebar-hover-bg);
+        }
+
+        .category-button.active {
+            background-color: var(--sidebar-active-bg);
+            color: var(--sidebar-active-text);
+            font-weight: 600;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            body {
+                flex-direction: column; /* Stack sidebar and content on smaller screens */
+            }
+
+            .side-menu {
+                width: 100%;
+                min-width: unset; /* Remove min-width */
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+                padding: 15px var(--gap-spacing);
+            }
+
+            .side-menu h2 {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            .category-list {
+                display: flex; /* Make categories inline */
+                flex-wrap: wrap; /* Allow categories to wrap */
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .category-item {
+                margin-bottom: 0; /* Remove vertical margin */
+            }
+
+            .category-button {
+                width: auto; /* Let button size to content */
+                padding: 8px 15px;
+                border: 1px solid var(--border-color);
+                border-radius: var(--border-radius);
+            }
+
+            .page-header {
+                padding-top: 30px; /* Adjust header padding */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2em;
+            }
+
+            .document-library-grid {
+                padding: 0 15px 15px;
+                gap: 15px;
+            }
+
+            .document-thumbnail {
+                height: 150px;
+            }
+
+            .modal-content {
+                width: 95%;
+                height: 95%;
+                margin: 10px;
+                padding: 15px;
+            }
+
+            .modal-header h2 {
+                font-size: 1.2em;
+            }
+
+            .modal-close-button {
+                font-size: 1.8em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header {
+                padding: 30px 15px;
+            }
+
+            .page-header h1 {
+                font-size: 1.8em;
+            }
+
+            .document-card {
+                margin: 0 auto; /* Center single column cards */
+                max-width: 350px; /* Max width for smaller screens */
+            }
+
+            .card-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .preview-button, .download-link {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="side-menu">
+        <h2>Categories</h2>
+        <ul class="category-list" id="categoryList">
+            </ul>
+    </aside>
+
+    <div class="content-wrapper">
+        <header class="page-header">
+            <h1>Our Resources</h1>
+            <p>Explore our collection of important documents and guides, grouped by category.</p>
+        </header>
+
+        <main class="document-library-grid" id="documentLibrary">
+            </main>
+    </div>
+
+    <div id="pdfPreviewModal" class="pdf-preview-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Document Preview</h2>
+                <button class="modal-close-button" aria-label="Close PDF preview">&times;</button>
+            </div>
+            <div class="pdf-iframe-container">
+                <iframe id="pdfIframe" class="pdf-iframe" src="" frameborder="0" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const documents = [
+                {
+                    title: "Annual Report 2024",
+                    description: "Detailed overview of the company's performance and achievements.",
+                    pdfPath: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+                    thumbnailPath: "https://via.placeholder.com/280x180/007bff/FFFFFF?text=Annual+Report",
+                    category: "Reports"
+                },
+                {
+                    title: "User Guide for Product X",
+                    description: "A comprehensive guide to help new users get started quickly.",
+                    pdfPath: "https://www.africau.edu/images/default/sample.pdf",
+                    thumbnailPath: "https://via.placeholder.com/280x180/28a745/FFFFFF?text=User+Guide",
+                    category: "User Guides"
+                },
+                {
+                    title: "Product Brochure",
+                    description: "Discover the features and benefits of our latest product offering.",
+                    pdfPath: "https://www.buds.org.au/library/sample.pdf",
+                    thumbnailPath: "https://via.placeholder.com/280x180/dc3545/FFFFFF?text=Brochure",
+                    category: "Marketing"
+                },
+                {
+                    title: "Privacy Policy",
+                    description: "Our company's privacy policy and data handling guidelines.",
+                    pdfPath: "https://pdf-services.adobe.com/asset-storage/pdf-documents/sample.pdf",
+                    thumbnailPath: "https://via.placeholder.com/280x180/ffc107/333333?text=Policy+Doc",
+                    category: "Policies"
+                },
+                {
+                    title: "Financial Statements Q1",
+                    description: "Quarterly financial performance summary.",
+                    pdfPath: "https://www.africau.edu/images/default/sample.pdf",
+                    thumbnailPath: "https://via.placeholder.com/280x180/6c757d/FFFFFF?text=Financial+Q1",
+                    category: "Reports"
+                },
+                {
+                    title: "Quick Start Guide",
+                    description: "Get started with Product Y in minutes.",
+                    pdfPath: "https://www.buds.org.au/library/sample.pdf",
+                    thumbnailPath: "https://via.placeholder.com/280x180/17a2b8/FFFFFF?text=Quick+Guide",
+                    category: "User Guides"
+                }
+            ];
+
+            const documentLibrary = document.getElementById('documentLibrary');
+            const pdfPreviewModal = document.getElementById('pdfPreviewModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const pdfIframe = document.getElementById('pdfIframe');
+            const modalCloseButton = pdfPreviewModal.querySelector('.modal-close-button');
+            const categoryList = document.getElementById('categoryList');
+
+            let allDocumentCards = []; // Store all generated document card elements
+
+            function createDocumentCard(doc) {
+                const article = document.createElement('article');
+                article.className = 'document-card';
+                article.dataset.category = doc.category; // Add data attribute for filtering
+
+                article.innerHTML = `
+                    <div class="card-content">
+                        <img src="${doc.thumbnailPath}" alt="Thumbnail for ${doc.title}" class="document-thumbnail">
+                        <div class="document-info">
+                            <h2 class="document-title">${doc.title}</h2>
+                            <p class="document-description">${doc.description}</p>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="preview-button" data-pdf-path="${doc.pdfPath}" data-pdf-title="${doc.title}">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                            </svg>
+                            Preview
+                        </button>
+                        <a href="${doc.pdfPath}" target="_blank" rel="noopener noreferrer" class="download-link" aria-label="Download ${doc.title} PDF">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                            </svg>
+                            Download
+                        </a>
+                    </div>
+                `;
+                return article;
+            }
+
+            // Function to render documents based on filter
+            function renderDocuments(filterCategory = 'All') {
+                documentLibrary.innerHTML = ''; // Clear current documents
+                allDocumentCards = []; // Clear previous cards
+
+                documents.forEach(doc => {
+                    if (filterCategory === 'All' || doc.category === filterCategory) {
+                        const card = createDocumentCard(doc);
+                        documentLibrary.appendChild(card);
+                        allDocumentCards.push(card); // Store reference to the card
+                    }
+                });
+            }
+
+            // Function to generate and manage category buttons
+            function setupCategories() {
+                const categories = new Set(documents.map(doc => doc.category));
+                const uniqueCategories = ['All', ...Array.from(categories).sort()]; // Add 'All' and sort alphabetically
+
+                uniqueCategories.forEach(category => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'category-item';
+                    const button = document.createElement('button');
+                    button.className = 'category-button';
+                    button.textContent = category;
+                    button.dataset.category = category; // Store category name in data attribute
+
+                    listItem.appendChild(button);
+                    categoryList.appendChild(listItem);
+                });
+
+                // Set initial 'All' button as active
+                const initialActiveButton = categoryList.querySelector('.category-button[data-category="All"]');
+                if (initialActiveButton) {
+                    initialActiveButton.classList.add('active');
+                }
+
+                // Add event listener for category clicks
+                categoryList.addEventListener('click', (event) => {
+                    const clickedButton = event.target.closest('.category-button');
+                    if (clickedButton) {
+                        // Remove active class from all buttons
+                        categoryList.querySelectorAll('.category-button').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        // Add active class to the clicked button
+                        clickedButton.classList.add('active');
+
+                        const selectedCategory = clickedButton.dataset.category;
+                        filterDocuments(selectedCategory);
+                    }
+                });
+            }
+
+            // Function to filter documents based on selected category
+            function filterDocuments(selectedCategory) {
+                allDocumentCards.forEach(card => {
+                    if (selectedCategory === 'All' || card.dataset.category === selectedCategory) {
+                        card.style.display = 'flex'; // Show card
+                    } else {
+                        card.style.display = 'none'; // Hide card
+                    }
+                });
+            }
+
+            // --- Modal and Preview Logic (unchanged from previous version) ---
+            documentLibrary.addEventListener('click', (event) => {
+                const previewButton = event.target.closest('.preview-button');
+                if (previewButton) {
+                    const pdfPath = previewButton.dataset.pdfPath;
+                    const pdfTitle = previewButton.dataset.pdfTitle;
+                    modalTitle.textContent = pdfTitle;
+                    pdfIframe.src = pdfPath;
+                    pdfPreviewModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+
+            modalCloseButton.addEventListener('click', () => {
+                pdfPreviewModal.classList.remove('active');
+                pdfIframe.src = '';
+                document.body.style.overflow = '';
+            });
+
+            pdfPreviewModal.addEventListener('click', (event) => {
+                if (event.target === pdfPreviewModal) {
+                    pdfPreviewModal.classList.remove('active');
+                    pdfIframe.src = '';
+                    document.body.style.overflow = '';
+                }
+            });
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && pdfPreviewModal.classList.contains('active')) {
+                    pdfPreviewModal.classList.remove('active');
+                    pdfIframe.src = '';
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Initial setup on page load
+            setupCategories();
+            renderDocuments('All'); // Display all documents initially
+        });
+    </script>
+</body>
+</html>

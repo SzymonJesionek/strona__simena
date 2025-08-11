@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Full Page 12x12 Grid</title>
+<style>
+  /* Reset default margins and paddings */
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  /* Make grid fill entire viewport */
+  .grid-container {
+    display: grid;
+    height: 100vh; /* full viewport height */
+    width: 100vw;  /* full viewport width */
+    grid-template-rows: repeat(12, 1fr);
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  /* Style for each cell */
+  .grid-cell {
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-container" id="grid"></div>
+
+<script>
+  const gridContainer = document.getElementById('grid');
+
+  // Create 144 cells for 12x12 grid
+  for (let i = 0; i < 12 * 12; i++) {
+    const cell = document.createElement('div');
+    cell.className = 'grid-cell';
+
+    // Calculate percentage size (for display purposes)
+    const widthPercent = (100 / 12).toFixed(2);
+    const heightPercent = (100 / 12).toFixed(2);
+
+    // Optional: display percentages inside cell
+    cell.innerText = `${widthPercent}% x ${heightPercent}%`;
+
+    gridContainer.appendChild(cell);
+  }
+</script>
+</body>
+</html>
