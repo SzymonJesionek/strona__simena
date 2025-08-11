@@ -1,0 +1,427 @@
+/*
+Mulish
+Designed by Vernon Adams, Cyreal, Jacques Le Bailly
+
+License
+Copyright 2016 The Mulish Project Authors (https://github.com/googlefonts/mulish)
+This Font Software is licensed under the SIL Open Font License, Version 1.1 . This license is copied below, and is also available with a FAQ at: https://openfontlicense.org
+
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide development of collaborative font projects, to support the font creation efforts of academic and linguistic communities, and to provide a free and open framework in which fonts may be shared and improved in partnership with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and redistributed freely as long as they are not sold by themselves. The fonts, including any derivative works, can be bundled, embedded, redistributed and/or sold with any software provided that any reserved names are not used by derivative works. The fonts and derivatives, however, cannot be released under any other type of license. The requirement for fonts to remain under this license does not apply to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+"Font Software" refers to the set of files released by the Copyright Holder(s) under this license and clearly marked as such. This may include source files, build scripts and documentation.
+
+"Reserved Font Name" refers to any names specified as such after the copyright statement(s).
+
+"Original Version" refers to the collection of Font Software components as distributed by the Copyright Holder(s).
+"Modified Version" refers to any derivative made by adding to, deleting, or substituting -- in part or in whole -- any of the components of the Original Version, by changing formats or by porting the Font Software to a new environment.
+
+"Author" refers to any designer, engineer, programmer, technical writer or other person who contributed to the Font Software.
+
+PERMISSION & CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining a copy of the Font Software, to use, study, copy, merge, embed, modify, redistribute, and sell modified and unmodified copies of the Font Software, subject to the following conditions:
+
+Neither the Font Software nor any of its individual components, in Original or Modified Versions, may be sold by itself.
+Original or Modified Versions of the Font Software may be bundled, redistributed and/or sold with any software, provided that each copy contains the above copyright notice and this license. These can be included either as stand-alone text files, human-readable headers or in the appropriate machine-readable metadata fields within text or binary files as long as those fields can be easily viewed by the user.
+No Modified Version of the Font Software may use the Reserved Font Name(s) unless explicit written permission is granted by the corresponding Copyright Holder. This restriction only applies to the primary font name as presented to the users.
+The name(s) of the Copyright Holder(s) or the Author(s) of the Font Software shall not be used to promote, endorse or advertise any Modified Version, except to acknowledge the contribution(s) of the Copyright Holder(s) and the Author(s) or with their explicit written permission.
+The Font Software, modified or unmodified, in part or in whole, must be distributed entirely under this license, and must not be distributed under any other license. The requirement for fonts to remain under this license does not apply to any document created using the Font Software.
+TERMINATION
+This license becomes null and void if any of the above conditions are not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM OTHER DEALINGS IN THE FONT SOFTWARE.
+*/
+
+/*
+  Copyright (c) 2025 Szymon Jesionek
+  All rights reserved.
+
+  This stylesheet is proprietary and covers only code authored by Szymon Jesionek.
+  Commercial use is permitted only with written consent.
+
+  Note: This does not apply to visual or textual content not created by the author.
+*/
+
+:root {
+  --bg-color: #232026; /* Background color for body */
+  --header-bg-color: #0b080e; /* Background color for header */
+  --text-color: #fffefd; /* Text color */
+  --content-bg-color: #0b080e; /* Background color for the content area */
+  --link-color: #aa0e0e; /* Semi-transparent link color */
+  --link-hover-color: #0b080e; /* Lighter semi-transparent hover color */
+  /* #0b080e #41444B*/
+  --font-size: 16px;
+  --letter-spacing: calc(0.12 * var(--font-size));
+  /* Letter spacing: 0.12 times font size */
+  --word-spacing: calc(0.16 * var(--font-size));
+  /* Word spacing: 0.16 times font size */
+}
+ /* add comment , after done foe self */
+.mulish{
+  font-family: "Mulish", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+}
+
+html{
+  font-size: 100%;
+  scroll-behavior: smooth;
+}
+
+html,body {
+  height: 100%; /* Ensure the body uses the full height of the viewport */
+  margin: 0; /* Remove default margin */
+}
+
+body {
+  font-family: 'Mulish', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  background-color: var(--bg-color);
+  letter-spacing: var(--letter-spacing) ; /* 0.12 times the font size */
+  word-spacing: var(--word-spacing); /* 0.16 times the font size */
+}
+
+p {
+  line-height: 1.6; /* Increases space between lines */
+  margin-bottom: 1.25em; /* Space below each paragraph */
+  max-width: 37.5em;
+}
+
+h1 {
+  position: relative;
+  text-align: center;
+  margin:1.25em;
+}
+
+h2 {
+  font-weight: 800;
+  line-height: 1.6;
+  margin-top: 0;
+  font-size: 1.25em; /* Large heading */
+  max-width: 37.5em;
+}
+
+
+header {
+  padding: 0.5em 0.5em;
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--header-bg-color);
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  transition-delay: 0.1s;
+  transition-duration: 0.8s;
+  display: inline-block;
+  padding: 0.5em 0.5em;
+  border-radius:0.0625em;
+  text-align: center;
+  width: 100%;
+}
+
+.logo img {
+  width: 31.25em;
+  height: auto;
+  max-width: 100%;
+}
+
+nav {
+  width: 100%;
+  text-align: center;
+}
+
+.button-nav {
+  font-weight: 800;
+  transition-delay: 0.1s;
+  transition-duration: 0.3s;
+  display: flex; /* Use flexbox for button navigation */
+  flex-wrap: wrap; /* Allow buttons to wrap to the next line */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.button-nav li {
+  transition-delay: 0.1s;
+  transition-duration: 0.3s;
+  margin: 0 0.625em; /* Margin between buttons */
+}
+
+.button-nav a {
+  transition-delay: 0.1s;
+  transition-duration: 0.3s;
+  display: inline-block;
+  color: var(--text-color);
+  text-decoration: none;
+  padding: 0.625em 0.9375em;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease,    border-color 0.3s ease;
+  border-radius: 0.0625em;
+  border: 0.125em solid var(--text-color);
+  background: rgba(0, 3, 19, 0.1);
+  box-shadow: 0 0.25em 0.625em rgba(0, 0, 0, 0.2);
+  transition-delay: padding 0.3s ;
+  transform: scale(1);
+  transition: transform 0.5s ease-in-out,
+  background-color 0.5s ease-in-out, border 0.5s ease-in-out,
+  box-shadow 0.5s ease-in-out, padding 0.5s ;;
+}
+
+.button-nav a:hover {
+  background-color: var(--link-hover-color);
+  border: 0.125em solid var(--link-color);
+  transform: scale(1.1);
+  box-shadow: 0 0.375em 0.75em rgba(0, 0, 0, 0.3);
+}
+
+main {
+  box-sizing: border-box;
+  text-align: center; /* Center-align main content */
+  padding: 2.5em; /* Add space inside main section */
+  align-items: center;
+  justify-content: space-between;
+}
+
+.content {
+  display: flex;
+  color: #f0ece4;
+  background-color: var(--content-bg-color);
+  padding: 2em 0.5em;
+  border-radius: 0.5em;
+  box-shadow: 0 0.125em 0.625em rgba(0, 0, 0, 0.3);
+  margin: 1.25em auto;
+  width: 85%;
+  opacity: 0; /* Start as invisible */
+  animation: fadeIn 3s forwards; /* Apply fadeIn animation */
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+footer {
+  background-color: var(--bg-color);
+  text-align: center; /* Center align footer text */
+  padding: 1.25em 0; /* Space inside footer */
+  position: relative; /* Position for sticking to bottom if necessary */
+  bottom: 0; /* Align at the bottom of the page */
+  width: 100%; /* Full width */
+}
+
+footer p {
+  margin: 0; /* Remove default margin */
+}
+
+.image-container {
+  display: inline-block;
+  display: flex;
+  justify-content: center; /* Center the logo */
+}
+
+.image-text-container {
+  padding: 1em;
+  margin: 1.25em 0; /* Space around the logo */
+  display: flex; /* Line up image and text side by side */
+  justify-content: center; /* Center align the content if desired */
+  align-items: center; /* Center vertically align */
+}
+
+.left-image {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  transition-delay: 0.1s;
+  transition-duration: 1s;
+  border-radius: 1.25em;
+  margin: 1em 0;
+  width: 50%; /* Set the image to occupy half the width of its parent */
+  height: auto; /* Maintain aspect ratio */
+  max-width: 100%; /* Ensure the image does not exceed 100% of its container */
+
+  opacity: 0;
+    animation: fade_from 3s forwards;
+    transition-delay: animation 0.1s;
+}
+
+.text-content {
+  margin-left: 1.25em; /* Space between image and text */
+  padding: 1em;
+  text-align: 1.6;
+}
+
+.container {
+  text-align: justify;
+  display: flex;
+  justify-content: space-between;
+}
+.column {
+  text-align: left ;
+  flex: 1 1 calc(45% - 1em);
+  margin: 1.25em;
+}
+
+/* Responsive Design */
+@media (max-width: 45em) {
+  body {
+    font-size: 14px; /* Smaller font for mobile devices */
+    letter-spacing: calc(0.08 * font-size); /* Further reduced letter spacing */
+    word-spacing: calc(0.12 * font-size);   /* Further reduced word spacing */
+}
+
+  .left-image{
+    opacity: 0;
+    animation: fade_to 3s forwards;
+    transition: animation 0.5s;
+  }
+
+  .button-nav li {
+    display: block; /* Stack button navigation */
+    margin: 0.3125em 0; /* Space between items */
+    transition-delay: 0.1s;
+    transition-duration: 0.3s; /* Transition effect */
+  }
+
+  .image-text-container {
+    overflow: hidden;
+    flex-direction: column; /* Stack image and text on small screens */
+    text-align: center; /* Center text on smaller screens */
+    transition-delay: 0.1s;
+    transition-duration: 0.3s;
+  }
+
+  .text-content {
+    overflow: hidden;
+    margin-left: 0; /* Reset margin on small screens */
+    transition: 0.3s;
+  }
+
+  .header-container {
+    overflow: hidden;
+    flex-direction: column; /* Stack logo and nav vertically */
+    align-items: center; /* Center items */
+    transition-delay: 0.1s;
+    transition-duration: 0.3s;
+  }
+
+  .button-nav {
+    overflow: hidden;
+    justify-content: center; /* Center nav items in small screens */
+    transition-delay: 0.1s;
+    transition-duration: 0.3s;
+  }
+
+  .button-nav li {
+    margin: 0.3125em; /* Reduce margin on smaller screens */
+    transition-delay: 0.1s;
+    transition-duration: 0.3s;
+  }
+
+  .button-nav a {
+    overflow: hidden;
+    width: auto; /* Use automatic width on smaller screens */
+    padding: 0.5em 0.3125em; /* Adjust padding for smaller screens */
+    transition-delay: padding 0.1s ;
+    transform: scale(1);
+  transition: transform 0.5s ease-in-out,
+  background-color 0.5s ease-in-out, border 0.5s ease-in-out,
+  box-shadow 0.5s ease-in-out, padding 0.5s;
+  }
+
+  .button-nav a:hover {
+    overflow: hidden;
+    background-color: var(--link-hover-color);
+    border: 0.125em solid var(--link-color);
+    transform: scale(1.1);
+    box-shadow: 0 0.375em 0.75em rgba(0, 0, 0, 0.3);
+  }
+
+  .logo {
+    overflow: hidden;
+    text-align: center; /* Center logo in smaller screens */
+    margin-bottom: 0.625em;
+    flex-direction: column;
+    width: 21.875em;
+    height: auto;
+    max-width: 100%;
+    transition-delay: 0.1s;
+    transition-duration: 0.5s;
+  }
+
+  .content{
+    transition: all 0.3s ease;
+    overflow: hidden;
+    opacity: 0; /* Start as invisible */
+    animation: fadeIn 3s forwards;
+  }
+
+  .container{
+    overflow: hidden;
+    flex-direction: column; /* Stack image and text on small screens */
+    text-align: justify;
+    width: 100%;            /* Make paragraphs or divs take full width */
+    margin: 0;             /* Reset margin to prevent unwanted spacing */
+  }
+  .column{
+    overflow: hidden;
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 25em) {
+  body {
+    font-size: 12px; /* Even smaller font for very small screens */
+  }
+
+  p h2 {
+    font-size: 0.8rem;   /* Further reduce font size */
+  }
+
+  .button-nav li {
+    overflow: hidden;
+    margin: 0.25em 0; /* Reduce margin more on very small screens */
+  }
+
+  .button-nav a {
+    padding: 0.4em 0.2em; /* Adjust padding for very small screens */
+  }
+
+  .logo {
+    width: 16em; /* Adjust logo width for smaller screens */
+  }
+
+  .content {
+    overflow: hidden;
+    font-size: 12px; /* Small font size for content */
+  }
+}
+
+/* Keyframes for the fade-in effect */
+@keyframes fadeIn {
+  to {
+    opacity: 1; /* End state is fully visible */
+  }
+}
+
+@keyframes fade_to{
+  to{
+    opacity: 1;
+  }
+}
+
+@keyframes fade_from{
+  to{
+    opacity: 1;
+  }
+}

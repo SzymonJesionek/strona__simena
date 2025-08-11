@@ -1,0 +1,16 @@
+html{
+    font-size: 100%;
+    scroll-behavior: smooth;
+  }
+  
+  html,body {
+    height: 100%; /* Ensure the body uses the full height of the viewport */
+    margin: 0; /* Remove default margin */
+  }
+  
+  body {
+    font-family: "Open Sans", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+  }

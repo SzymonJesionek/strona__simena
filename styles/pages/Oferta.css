@@ -1,0 +1,62 @@
+:root {
+    --bg-color: #232026; /* Background color for body */
+    --header-bg-color: #0b080e; /* Background color for header */
+    --text-color: #fffefd; /* Text color */
+    --content-bg-color: #0b080e; /* Background color for the content area */
+    --link-color: #aa0e0e; /* Semi-transparent link color */
+    --link-hover-color: #0b080e; /* Lighter semi-transparent hover color */
+    /* #0b080e #41444B*/
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1.25em 1.25em;
+}
+
+.tile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none; /* Remove underline on link */
+
+
+
+    color: var(--text-color);
+    border: 0.125em solid var(--link-color); /* 2px equals 0.125em */
+    border-radius: 0.625em; /* 10px equals 0.625em */
+    padding: 1em;
+    margin: 1.25em ;
+    flex: 1 1 18.75em; /* 300px equals 18.75em */
+    min-height: 12.5em; /* 200px equals 12.5em */
+    position: relative; /* To manage text overlay */
+    overflow: hidden; /* Ensure contents stay within bounds */
+    transition: transform 0.3s, background 0.3s;
+    background-size: cover; /* Ensures the background image covers the tile */
+    background-position: center; /* Centers the background image */
+}
+
+.tile::before {
+    margin: 1.25em 1.25em;
+
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(0.625em); /* 10px equals 0.625em */
+    background: rgba(11, 8, 14, 0.6); /* Glass effect */
+    border-radius: 0.625em; /* 10px equals 0.625em */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s; /* Fade in effect */
+}
+
+.tile:hover::before {
+    opacity: 1; /* Show the overlay on hover */
+}
+
+.tile:hover {
+    transform: scale(1.05); /* Scale effect on hover */
+}

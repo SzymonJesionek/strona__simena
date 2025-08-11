@@ -1,0 +1,12 @@
+footer {
+    background-color: var(--bg-color);
+    text-align: center; /* Center align footer text */
+    padding: 1.25em 0; /* Space inside footer */
+    position: relative; /* Position for sticking to bottom if necessary */
+    bottom: 0; /* Align at the bottom of the page */
+    width: 100%; /* Full width */
+  }
+  
+  footer p {
+    margin: 0; /* Remove default margin */
+  }

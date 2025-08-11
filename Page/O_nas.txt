@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Spółdzielnia 'Simena', założona w 1977 roku,
+    oferuje szeroki asortyment wysokiej jakości czujników, wyłączników oraz
+    mechanizmów napędowych dla motoryzacji i rolnictwa. Współpracujemy z międzynarodowymi
+    partnerami, zapewniając innowacyjne rozwiązania i certyfikowaną jakość ISO.
+    Nasze doświadczenie i zaangażowanie w produkcję oraz projektowanie narzędzi sprawiają,
+    że jesteśmy liderem na rynku europejskim." />
+    <meta name="keywords" content="Simena, czujniki, wyłączniki, mechanizmy napędowe,
+    motoryzacja, rolnictwo, innowacje, wysokiej jakości produkty, ISO, produkcja,
+    projektowanie narzędzi, dachowe okucia, współpraca międzynarodowa" />
+    <meta name="author" content="Szymon Piotr Jesionek">
+    <link rel="icon" href="../Img/logo.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/pages/O_nas.css">
+
+    <title>About us</title>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="../Img/ll_simena_proper.png" alt="Company Logo">
+            </div>
+            <div class="nav-container">
+        <nav>
+            <ul class="button-nav">
+                <li><a href="../index.html">Główna</a></li>
+                <li><a href="O_nas.html">O Nas</a></li>
+                <li><a href="Kontakt.html">Kontakt</a></li>
+                <li><a href="Oferta/Uslugi.html">Usługi</a></li>
+                <li><a href="Oferta/Wyroby.html">Wyroby</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+    </header>
+    <h1 style="color:#fffefd;">O nas</h1> 
+    <main class="content">
+        <div class="image-text-container">
+            <div class="text-content">
+                <div class="container">
+                    <div class="column">
+            <p>Spółdzielnia "Simena" powstała w 1977 r. w oparciu o kooperację z MERA-PNEFAL w Falenicy w którym produkowane były termostaty samochodowe.
+                W 1979 r. została opracowana pierwsza koncepcja rozwoju Spółdzielni. Na  jej bazie w IV kwartale 1979 roku nastąpiło uruchomienie nowych asortymentów produkcji.     
+                Z dniem 1 stycznia 1980 roku w Spółdzielni rozpoczęto produkcję czujników i połączników hydraulicznych dla motoryzacji, a trzy lata później uruchomiono produkcję przycisków P40-14 i P40-15 oraz uchwytów wiertarskich.
+                W roku 2000 rozpoczęliśmy trwającą do dziś współpracę ze światowym producentem okuć i okien dachowych, firmą Roto. Dla tego międzynarodowego koncernu dostarczamy elementy okuć okiennych.
+            </p>
+                    </div>
+                <div class="column">  
+                    <p>
+                Aktualnie "Simena" produkuje szeroki asortyment czujników, przycisków, wyłączników mechanicznych i hydraulicznych dla motoryzacji i rolnictwa, mechanizmów napędowych wycieraczek, uchwytów wiertarskich oraz elementy nowoczesnych okuć okien dachowych.
+                Poza działalnością produkcyjną Spółdzielnia specjalizuje się również w projektowaniu i wykonawstwie narzędzi oraz precyzyjnej obróbce metali.
+                Współpracujemy z największymi dystrybutorami oraz hurtowniami z Polski oraz m.in. z Czech, Słowacji, Bośni i Hercegowiny, Serbii, Rumunii czy Chorwacji.</p>
+            </p> 
+                </div>
+        </div>
+        </div>
+</main>
+</body>
+</html>

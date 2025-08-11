@@ -1,0 +1,42 @@
+.button-nav {
+    transition-delay: 0.5s;
+    transition-duration: 1s;
+    display: flex; /* Use flexbox for button navigation */
+    flex-wrap: wrap; /* Allow buttons to wrap to the next line */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .button-nav li {
+    transition-delay: 0.5s;
+    transition-duration: 1s;
+    margin: 0 0.625em; /* Margin between buttons */
+  }
+  
+  .button-nav a {
+    transition-delay: 0.5s;
+    transition-duration: 1s;
+    display: inline-block;
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 0.625em 0.9375em;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease,    border-color 0.3s ease;
+    border-radius: 0.0625em;
+    border: 0.125em solid var(--text-color);
+    background: rgba(0, 3, 19, 0.1);
+    box-shadow: 0 0.25em 0.625em rgba(0, 0, 0, 0.2);
+    transition-delay: padding 0.3s ;
+    transform: scale(1);
+    transition: transform 0.5s ease-in-out,
+    background-color 0.5s ease-in-out, border 0.5s ease-in-out,
+    box-shadow 0.5s ease-in-out, padding 1s ;;
+  }
+  
+  .button-nav a:hover {
+    background-color: var(--link-hover-color);
+    border: 0.125em solid var(--link-color);
+    transform: scale(1.1);
+    box-shadow: 0 0.375em 0.75em rgba(0, 0, 0, 0.3);
+  }

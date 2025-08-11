@@ -1,0 +1,132 @@
+:root {
+    --primary-color: #0b080e;
+    --secondary-color: #aa0e0e;
+    --text-color: #fffefd;
+    --background-color: #232026;;
+    --card-background: #0b080e;
+    --font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    text-align: center;
+    background: var(--primary-color);
+    color: white;
+    padding: 20px 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px;
+}
+
+.product-item {
+    color: var(--text-color);
+    background: var(--card-background);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 15px;
+    text-align: center;
+    width: 220px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer; /* Added for usability */
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.product-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.product-item h2 {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.description {
+    font-size: 0.9em;
+    color: #fffefd;
+    margin-top: 10px;
+    height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+/*
+footer {
+    text-align: center;
+    background: var(--primary-color);
+    color: white;
+    padding: 15px 0;
+}
+*/
+
+/* Modal Styles */
+.modal {
+    color: var(--text-color);
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.8); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #0b080e;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #aa0e0e;
+    width: 80%; /* Could be more or less, depending on screen size */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.close {
+    color: #aaa;
+    float: right; /* Aligns close button to the right */
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
