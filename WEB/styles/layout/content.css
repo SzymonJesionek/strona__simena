@@ -1,0 +1,57 @@
+main {
+    text-align: center; /* Center-align main content */
+    padding: 2.5em; /* Add space inside main section */
+  }
+  
+  h1 {
+    margin-top: 0; /* Remove default margin */
+  }
+  
+  .content {
+    display: flex;
+    color: #f0ece4;
+    background-color: var(--content-bg-color);
+    padding: 2em 0.5em;
+    border-radius: 0.5em;
+    box-shadow: 0 0.125em 0.625em rgba(0, 0, 0, 0.3);
+    margin: 1.25em auto;
+    width: 85%;
+    opacity: 0; /* Start as invisible */
+    animation: fadeIn 3s forwards; /* Apply fadeIn animation */
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .image-container {
+    display: inline-block;
+    display: flex;
+    justify-content: center; /* Center the logo */
+  }
+  
+  .image-text-container {
+    padding: 1em;
+    margin: 1.25em 0; /* Space around the logo */
+    display: flex; /* Line up image and text side by side */
+    justify-content: center; /* Center align the content if desired */
+    align-items: center; /* Center vertically align */
+  }
+  
+  .left-image {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    transition-delay: 0.5s;
+    transition-duration: 1s;
+    border-radius: 1.25em;
+    margin: 1em 0;
+    width: 50%; /* Set the image to occupy half the width of its parent */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Ensure the image does not exceed 100% of its container */
+  
+    opacity: 0;
+      animation: fade_from 3s forwards;
+      transition-delay: animation 0.5s;
+  }
+  
+  .text-content {
+    margin-left: 1.25em; /* Space between image and text */
+    padding: 1em;
+    text-align: 1.6;
+  }
